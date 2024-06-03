@@ -1,15 +1,13 @@
 from bs4 import BeautifulSoup as bs
 import requests as re
 
-
 link0 = 'https://olimpiada.ru/article/1085#math'
 link1 = "https://olimpiada.ru/"
 
 def get():
     with open("data.txt") as fu:
         def ch(q):
-            return 'Наименование' not in q and 'Уровень' not in q
-    
+            return 'Наименование' not in q and 'Уровень' not in q    
         text = re.get(link0).text
         sp = bs(text,'lxml')
         al = sp.find_all("tr")
@@ -20,4 +18,3 @@ def get():
             dic[k[0]] = k[1:]
         return dic
         
-print(get())
