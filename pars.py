@@ -3,9 +3,6 @@ import requests
 import datetime
 import calendar
 
-#from time import time
-
-
 link = lambda x: 'https://postypashki.ru/ecwd_calendar/calendar/'+'?date='+x+'&t=list'
 
 def get_data(text):
@@ -13,15 +10,13 @@ def get_data(text):
     return sp.find("div", {"class": "event-content"}).text
 
 def pars(d):
-    #d = str(time()).split(".")[1][-1:-4:-1]+d
     d = d.split(":")
     try:
         dic = {d[0] : d[1]}
         return dic
     except IndexError:
         return {}
-    
-
+        
 def get_year():
     def inc(sd,ms):
         m= sd.month -1 +ms
@@ -31,10 +26,4 @@ def get_year():
     res = {}
     [res.update(pars(j)) for j in [get_data(requests.get(u).text) for u in ([link(inc(datetime.date.today(),g)) for g in range(12)])]]
     return res
-
-    
-     
-     
-
-print(get_year())
     
